@@ -6,6 +6,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
+	"sort"
 )
 
 // A Summary is a struct representing the output of a parsed K6 summary file
@@ -71,6 +72,10 @@ func NewSummaryFromReader(r io.Reader) (*Summary, error) {
 		s.Checks = append(s.Checks, v)
 	}
 
+	sort.Slice(s.Checks, func(i, j int) bool {
+		return s.Checks[i].Name < s.Checks[j].Name
+	})
+
 	//
 	// Get Thresholds
 	//
@@ -105,6 +110,10 @@ func NewSummaryFromReader(r io.Reader) (*Summary, error) {
 			}
 		}
 	}
+
+	sort.Slice(s.Thresholds, func(i, j int) bool {
+		return s.Thresholds[i].Name < s.Thresholds[j].Name
+	})
 
 	return s, nil
 }
