@@ -17,7 +17,7 @@ type Summary struct {
 	thrFailedCount   int
 }
 
-// A K6 Threshold
+// A Threshold in a K6 summary
 type Threshold struct {
 	// Name of the threshold
 	Name string
@@ -25,7 +25,7 @@ type Threshold struct {
 	Passed bool
 }
 
-// A K6 Check
+// A Check in a K6 summary
 type Check struct {
 	// Name of the check
 	Name string `json:"name"`
@@ -72,6 +72,7 @@ func NewSummaryFromReader(r io.Reader) (*Summary, error) {
 		s.Checks = append(s.Checks, v)
 	}
 
+	// Sort Checks to provide consistent output
 	sort.Slice(s.Checks, func(i, j int) bool {
 		return s.Checks[i].Name < s.Checks[j].Name
 	})
@@ -111,6 +112,7 @@ func NewSummaryFromReader(r io.Reader) (*Summary, error) {
 		}
 	}
 
+	// Sort Thresholds to provide consistent output.
 	sort.Slice(s.Thresholds, func(i, j int) bool {
 		return s.Thresholds[i].Name < s.Thresholds[j].Name
 	})
