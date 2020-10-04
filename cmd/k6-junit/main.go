@@ -10,11 +10,19 @@ import (
 	"github.com/l-ross/k6-junit/pkg/summary"
 )
 
+var version = "UNVERSIONED"
+
 func main() {
 	in := flag.String("in", "", "location of the k6 json summary")
 	out := flag.String("out", "", "location to write the JUnit summary to, if not specified prints to the console")
+	ver := flag.Bool("version", false, "print ver and exit")
 
 	flag.Parse()
+
+	if *ver {
+		fmt.Println(version)
+		os.Exit(0)
+	}
 
 	f, err := os.Open(*in)
 	if err != nil {
