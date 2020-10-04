@@ -4,7 +4,9 @@ k6-junit provides a utility to convert a [k6](https://k6.io) JSON summary in to 
 
 ## Install
 
-TODO
+Install via Go: `go get github.com/l-ross/k6-junit/cmd/k6-junit`
+
+Download the latest release from GitHub [here](https://github.com/l-ross/k6-junit/releases/latest)
 
 ## Example
 
@@ -62,7 +64,3 @@ Then to generate the JUnit output run `k6-junit --in summary.json`, example outp
   </testsuite>
 </testsuites>
 ```
-
-TODO:
-- How to install
-- Release binary
